@@ -20,7 +20,7 @@ function Header() {
     if (route === location.pathname) return true;
   };
   return (
-    <div className="sticky top-0 z-50 bg-white border-b shadow-sm">
+    <div className="sticky top-0 z-40 bg-white border-b shadow-sm">
       <header className="flex items-center justify-between px-4 max-w-7xl mx-auto">
         <div>
           <img
