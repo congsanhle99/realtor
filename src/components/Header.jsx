@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 function Header() {
+  const [pageState, setPageState] = useState("Sign In");
   const location = useLocation();
   const navigate = useNavigate();
-  const pathMathRoute = (route) => {
+  const auth = getAuth();
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setPageState(`Welcome ${auth.currentUser.displayName}`);
+      } else {
+        setPageState("Sign In");
+      }
+    });
+  }, [auth]);
+
+  const pathMatchRoute = (route) => {
     if (route === location.pathname) return true;
   };
   return (
@@ -22,7 +34,7 @@ function Header() {
           <ul className="flex space-x-10">
             <li
               className={`py-3 text-md font-semibold text-gray-400 border-b-[3px] border-b-transparent cursor-pointer ${
-                pathMathRoute("/") && "text-black border-b-red-500"
+                pathMatchRoute("/") && "text-black border-b-red-500"
               }`}
               onClick={() => navigate("/")}
             >
@@ -30,7 +42,7 @@ function Header() {
             </li>
             <li
               className={`py-3 text-md font-semibold text-gray-400 border-b-[3px] border-b-transparent cursor-pointer ${
-                pathMathRoute("/offers") && "text-black border-b-red-500"
+                pathMatchRoute("/offers") && "text-black border-b-red-500"
               }`}
               onClick={() => navigate("/offers")}
             >
@@ -38,11 +50,11 @@ function Header() {
             </li>
             <li
               className={`py-3 text-md font-semibold text-gray-400 border-b-[3px] border-b-transparent cursor-pointer ${
-                pathMathRoute("/sign-in") && "text-black border-b-red-500"
+                (pathMatchRoute("/sign-in") || pathMatchRoute("/profile")) && "text-black border-b-red-500"
               }`}
-              onClick={() => navigate("/sign-in")}
+              onClick={() => navigate("/profile")}
             >
-              Sign In
+              {pageState}
             </li>
           </ul>
         </div>
