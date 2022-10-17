@@ -7,7 +7,6 @@ export function useAuthStatus() {
   useEffect(() => {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
-      console.log("auth", auth);
       if (user) {
         setLoggedIn(true);
       }
