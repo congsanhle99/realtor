@@ -71,7 +71,7 @@ function Profile() {
 
   return (
     <>
-      <section className="max-w-6xl mx-auto flex flex-col items-center justify-center">
+      <section className="max-w-6xl mx-auto flex flex-col items-center justify-between">
         <h1 className="text-3xl text-center mt-6 font-bold uppercase tracking-wider">My Profile</h1>
         <div className="w-full md:w-[60%] mt-6 px-6 md:px-10 ">
           <form action="" className="space-y-4">
@@ -131,7 +131,7 @@ function Profile() {
         {!loading && listings.length > 0 && (
           <>
             <h1 className="text-2xl font-semibold">My Listing</h1>
-            <ul>
+            <ul className="sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
               {listings.map((listing) => (
                 <ListingItem key={listing.id} id={listing.id} listing={listing.data} />
               ))}
