@@ -1,3 +1,4 @@
+import { getAuth } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { FaBath, FaBed, FaChair, FaParking, FaShare } from "react-icons/fa";
@@ -7,14 +8,17 @@ import { toast } from "react-toastify";
 import SwiperCore, { Autoplay, EffectFade, Navigation, Pagination } from "swiper";
 import "swiper/css/bundle";
 import { Swiper, SwiperSlide } from "swiper/react";
+import Contact from "../components/Contact";
 import Spinner from "../components/Spinner";
 import { db } from "../firebase";
 
 function Listing() {
+  const auth = getAuth();
   const params = useParams();
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(true);
   const [copyShareLink, setCopyShareLink] = useState(false);
+  const [contactLandlord, setContactLandlord] = useState(false);
   SwiperCore.use([Autoplay, Navigation, Pagination]);
   useEffect(() => {
     const fetchListing = async () => {
@@ -61,7 +65,7 @@ function Listing() {
         <FaShare className="text-lg text-slate-500" />
       </div>
       <div className="flex flex-col md:flex-row max-w-7xl lg:mx-auto rounded-lg shadow-lg bg-white lg:space-x-5 p-4 m-4">
-        <div className="bg-pink-300 w-full h-[200px] lg-[400px] space-y-4">
+        <div className="w-full space-y-4">
           <p className="text-2xl font-bold text-blue-900">
             {listing.name} - ${" "}
             {listing.offer
@@ -105,6 +109,17 @@ function Listing() {
               {+listing.furnished > 1 ? "Furnished" : "Not furnished"}
             </li>
           </ul>
+          {listing.userRef !== auth.currentUser?.uid && !contactLandlord && (
+            <div className="mt-6">
+              <button
+                className="px-7 py-3 bg-blue-600 text-white font-medium text-sm uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg w-full text-center transition duration-300 ease-in-out"
+                onClick={() => setContactLandlord(true)}
+              >
+                Contact Landlord
+              </button>
+            </div>
+          )}
+          {contactLandlord && <Contact userRef={listing.userRef} listing={listing} />}
         </div>
         <div className="bg-blue-300 w-full h-[200px] lg-[400px]"></div>
       </div>
