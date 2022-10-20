@@ -121,7 +121,8 @@ function Listing() {
           )}
           {contactLandlord && <Contact userRef={listing.userRef} listing={listing} />}
         </div>
-        <div className="bg-blue-300 w-full h-[200px] lg-[400px]"></div>
+        {/* map but, i don't enable geocoding api :))) */}
+        {/* <div className="bg-blue-300 w-full h-[200px] lg-[400px]"></div> */}
       </div>
     </main>
   );
