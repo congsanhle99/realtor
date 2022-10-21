@@ -1,12 +1,11 @@
 import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import SwiperCore, { Autoplay, EffectFade, Navigation, Pagination } from "swiper";
+import "swiper/css/bundle";
+import { Swiper, SwiperSlide } from "swiper/react";
 import Spinner from "../components/Spinner";
 import { db } from "../firebase";
-import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { EffectFade, Autoplay, Navigation, Pagination } from "swiper";
-import "swiper/css/bundle";
-import { useNavigate } from "react-router-dom";
-import { data } from "autoprefixer";
 
 function Slider() {
   const [listings, setListings] = useState(null);
@@ -26,7 +25,6 @@ function Slider() {
         });
       });
       setListings(listings);
-      console.log("listings", listings);
       setLoading(false);
     };
     fetchListing();
