@@ -78,7 +78,7 @@ function Offers() {
               ))}
             </ul>
           </main>
-          {lastFetchListing && (
+          {lastFetchListing && lastFetchListing.length >= 8 && (
             <div className="flex items-center justify-center">
               <button
                 className="bg-white px-3 py-1.5 text-gray-700 border border-gray-300 mb-6 mt-6 hover:border-slate-600 hover:scale-105 rounded transition duration-300 ease-in-out"

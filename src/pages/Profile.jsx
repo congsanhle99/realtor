@@ -52,18 +52,14 @@ function Profile() {
     const fetchUserListing = async () => {
       const listingRef = collection(db, "listings");
       const q = query(listingRef, where("userRef", "==", auth.currentUser.uid), orderBy("timestamp", "desc"));
-      console.log("q", q);
       const querSnap = await getDocs(q);
-      console.log("querSnap", querSnap);
       let listings = [];
       querSnap.forEach((doc) => {
-        console.log("doc", doc);
         return listings.push({
           id: doc.id,
           data: doc.data(),
         });
       });
-      console.log("listings", listings);
       setListings(listings);
       setLoading(false);
     };
@@ -112,7 +108,6 @@ function Profile() {
 
             <div className="flex justify-between whitespace-nowrap">
               <p className="flex items-center justify-between">
-                Do you want change your name?{" "}
                 <span
                   className="ml-2 bg-blue-500 text-white font-medium px-6 py-2 rounded border border-blue-500 hover:text-blue-700 hover:bg-transparent transition duration-300 ease-in-out cursor-pointer"
                   onClick={() => {
@@ -120,7 +115,7 @@ function Profile() {
                     setChangeDetail((prev) => !prev);
                   }}
                 >
-                  {changeDetail ? "Save Change" : "Edit"}
+                  {changeDetail ? "Save Change" : "Edit Profile"}
                 </span>
               </p>
               <p

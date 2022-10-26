@@ -45,9 +45,9 @@ function SignUp() {
   };
 
   return (
-    <section className="px-14">
+    <section className="px-4 sm:px-14">
       <div className="h-[90vh] flex items-center ">
-        <div className="h-[400px] md:w-[50%]">
+        <div className="hidden sm:block h-[400px] md:w-[50%]">
           <lottie-player
             src="https://assets1.lottiefiles.com/packages/lf20_q5pk6p1k.json"
             background="transparent"
@@ -99,7 +99,7 @@ function SignUp() {
                 />
               )}
             </div>
-            <div className="flex items-center justify-between whitespace-nowrap text-sm md:text-base gap-4">
+            <div className="sm:flex items-center justify-between whitespace-nowrap text-sm md:text-base gap-4">
               <p>
                 You have an account?{" "}
                 <Link to="/sign-in" className="text-red-400 hover:text-red-600 transition">

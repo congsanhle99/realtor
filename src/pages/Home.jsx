@@ -25,7 +25,6 @@ function Home() {
           });
         });
         setOfferListings(listings);
-        console.log(listings);
       } catch (error) {
         console.log(error);
       }
@@ -52,7 +51,6 @@ function Home() {
           });
         });
         setRentListings(listings);
-        console.log(listings);
       } catch (error) {
         console.log(error);
       }
@@ -79,7 +77,6 @@ function Home() {
           });
         });
         setSaleListings(listings);
-        console.log(listings);
       } catch (error) {
         console.log(error);
       }
@@ -89,7 +86,7 @@ function Home() {
 
   return (
     <div>
-      <Slider />
+      <Slider className="overflow-auto scrollbar-hide" />
       {/* Offers */}
       <div className="max-w-7xl mx-auto pt-4 space-y-6">
         {offerListings && offerListings.length > 0 && (
